@@ -1,29 +1,21 @@
 package ru.melnikov.RestAPI.RestAPI_server.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import ru.melnikov.RestAPI.RestAPI_server.transfer.interfacesGroups.Details;
-import ru.melnikov.RestAPI.RestAPI_server.transfer.interfacesGroups.EditName;
-import ru.melnikov.RestAPI.RestAPI_server.transfer.interfacesGroups.New;
+import ru.melnikov.RestAPI.RestAPI_server.utils.groups.AreaOfVisibility;
 
 import java.util.Date;
 
 //Валидировать поля лучше здесь
+@JsonView(AreaOfVisibility.Public.class)
 public class SensorDTO {
 
-    //Для отображения нужных полей создаю интерфейсы в папке transfer чтобы объеденять поля в группы
+    //Для отображения нужных полей создаю интерфейсы в классе в папке transfer чтобы объеденять поля в группы
 
-    //Указываю, что поле name не должно быть null при создании новго сенсора
-
-    @Size(min = 2, max = 50)//Spring сам пишет текст ошибки (да ещё и на русском)
-    @NotNull(groups = New.class)
-    @NotNull(groups = EditName.class)
-    @JsonView(Details.class)
+    @Size(min = 2, max = 50, message = "should between 2 to 50 characters")//Spring сам пишет текст ошибки (да ещё и на русском)
     private String name;
     //@JsonView - позваляет отображать нужные поля
-    @JsonView(Details.class)
+    @JsonView(AreaOfVisibility.Private.class)
     private Date createdAt;
 
     public String getName() {

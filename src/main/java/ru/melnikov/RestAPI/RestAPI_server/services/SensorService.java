@@ -9,6 +9,7 @@ import ru.melnikov.RestAPI.RestAPI_server.utils.errors.SensorNotFoundException;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 //Здесь работаем на уровне Sensor , а не SensorDTO - конвертация происходит в контроллере
 @Service
@@ -30,8 +31,14 @@ public class SensorService {
         return sensorRepository.findById(id).orElseThrow(SensorNotFoundException::new);
     }
 
+    public List<Sensor> getSensorInfoByName(String name){
+        return sensorRepository.getSensorByNameStartingWith(name).orElseThrow(SensorNotFoundException::new);
+    }
+
     @Transactional
     public void editSensorName(int id, Sensor sensor){
+        //Проверка на правильность ввода id сенсора тк такого может не существовать
+        getSensorInfo(id);
         sensorRepository.getSensorByIdAndUpdateName(sensor.getName(),id);
     }
 
@@ -39,5 +46,11 @@ public class SensorService {
     public void addSensor(Sensor sensor){
         sensor.setCreatedAt(new Date());
         sensorRepository.save(sensor);
+    }
+
+    @Transactional
+    public void deleteSensor(int id){
+        getSensorInfo(id);
+        sensorRepository.deleteById(id);
     }
 }

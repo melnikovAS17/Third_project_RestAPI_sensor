@@ -7,6 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.melnikov.RestAPI.RestAPI_server.models.Sensor;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface SensorRepository extends JpaRepository<Sensor,Integer> {
 
@@ -17,5 +20,7 @@ public interface SensorRepository extends JpaRepository<Sensor,Integer> {
     @Modifying
     @Query(value = "update sensor set name = ? where id = ?", nativeQuery = true)
     void getSensorByIdAndUpdateName(@Param("name") String name, @Param("id") int id);
+
+    Optional<List<Sensor>> getSensorByNameStartingWith(String name);
 
 }
