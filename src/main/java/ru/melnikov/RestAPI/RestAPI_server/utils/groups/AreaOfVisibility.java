@@ -9,4 +9,6 @@ public class AreaOfVisibility {
     //Отображают все поля тк Private наследует Public
     //с Public только те которые помечены Public (т е все кроме Private)
     public interface Private extends Public{}
+
+    public interface RainyDays {}
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.melnikov.RestAPI.RestAPI_server.models.Sensor;
 import ru.melnikov.RestAPI.RestAPI_server.repositories.SensorRepository;
-import ru.melnikov.RestAPI.RestAPI_server.utils.errors.SensorNotFoundException;
+import ru.melnikov.RestAPI.RestAPI_server.utils.errors.sensor.SensorNotFoundException;
 
 import java.util.Date;
 import java.util.List;
@@ -52,5 +52,10 @@ public class SensorService {
     public void deleteSensor(int id){
         getSensorInfo(id);
         sensorRepository.deleteById(id);
+    }
+
+    //Method for validating name unique
+    public Optional<Sensor> nameUniqueChecker(String name){
+        return sensorRepository.getSensorByName(name).stream().findAny();
     }
 }

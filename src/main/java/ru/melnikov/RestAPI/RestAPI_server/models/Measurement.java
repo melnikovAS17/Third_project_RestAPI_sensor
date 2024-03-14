@@ -12,7 +12,7 @@ public class Measurement {
     private int id;
 
     @Column(name = "temperature")
-    private int temperature;
+    private float temperature;
 
     @Column(name = "raining")
     private boolean raining;
@@ -23,7 +23,7 @@ public class Measurement {
 
     public Measurement(){}
 
-    public Measurement(int id, int temperature, boolean raining, Sensor sensor) {
+    public Measurement(int id, float temperature, boolean raining, Sensor sensor) {
         this.id = id;
         this.temperature = temperature;
         this.raining = raining;
@@ -38,7 +38,7 @@ public class Measurement {
         this.id = id;
     }
 
-    public int getTemperature() {
+    public float getTemperature() {
         return temperature;
     }
 
@@ -46,7 +46,7 @@ public class Measurement {
         this.temperature = temperature;
     }
 
-    public boolean isRaining() {
+    public boolean getRaining() {
         return raining;
     }
 
@@ -61,4 +61,5 @@ public class Measurement {
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
+
 }

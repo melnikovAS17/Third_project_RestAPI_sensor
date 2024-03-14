@@ -23,4 +23,7 @@ public interface SensorRepository extends JpaRepository<Sensor,Integer> {
 
     Optional<List<Sensor>> getSensorByNameStartingWith(String name);
 
+    //For validator
+    Optional<Sensor> getSensorByName(String name);
+
 }

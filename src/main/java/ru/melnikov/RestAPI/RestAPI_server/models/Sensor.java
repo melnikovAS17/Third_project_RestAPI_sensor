@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "sensor")
@@ -64,5 +65,18 @@ public class Sensor {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sensor sensor = (Sensor) o;
+        return id == sensor.id && Objects.equals(name, sensor.name) && Objects.equals(createdAt, sensor.createdAt) && Objects.equals(measurementList, sensor.measurementList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, createdAt, measurementList);
     }
 }

@@ -1,10 +1,11 @@
-package ru.melnikov.RestAPI.RestAPI_server.utils.errors;
+package ru.melnikov.RestAPI.RestAPI_server.utils.errors.measurement;
 
-public class SensorErrorResponse {
+public class MeasurementsErrorResponse {
+
     private String message;
     private long timeStamp;
 
-    public SensorErrorResponse(String message, long timeStamp) {
+    public MeasurementsErrorResponse(String message, long timeStamp) {
         this.message = message;
         this.timeStamp = timeStamp;
     }
